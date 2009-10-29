@@ -25,38 +25,40 @@ Installation
 
 1. Get the plugin.
 
-     script/plugin install git://github.com/overture8/footstool.git
+`script/plugin install git://github.com/overture8/footstool.git`
 
 2. Generating the config file.
 
-     script/generate footstool
+`script/generate footstool`
 
 3. Disable ActiveRecord in the `config/environment.rb`.
 
-     config.frameworks -= [ :active_record ]
+`config.frameworks -= [ :active_record ]`
 
 4. Make any changes to the `config/footstool.yml` file.  It is recommended that you add a database prefix.
 
-      development:
-        host: localhost
-        port: 5984
-        db_prefix: myapp_
-        db_suffix: _dev
-                
-      test:
-        host: localhost
-        port: 5984
-        db_prefix: myapp_
-        db_suffix: _test
-                        
-      production:
-        host: localhost
-        port: 5984
-        db_prefix: myapp_
-        db_suffix: _production
+<pre>
+development:
+  host: localhost
+  port: 5984
+  db_prefix: myapp_
+  db_suffix: _dev
+          
+test:
+  host: localhost
+  port: 5984
+  db_prefix: myapp_
+  db_suffix: _test
+                  
+production:
+  host: localhost
+  port: 5984
+  db_prefix: myapp_
+  db_suffix: _production
+</pre>
 
 Usage
 =====
 
 
-Copyright (c) 2009 Phil McClure, released under the MIT license
+Copyright (c) 2009 Phil McClure (overture8), released under the MIT license
