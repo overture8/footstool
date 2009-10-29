@@ -90,7 +90,6 @@ end
 **Views** are pretty standard.  For `new.html.erb`...
 
 <pre>
-<h1>New Post</h1>
 <% form_for @post do |f| %>                                                                                                                                                                                    
   <%= couchdb_rev_field f, @post %>
 
@@ -102,9 +101,9 @@ end
 </pre>
 
 For `show.html.erb`...
-
-<h1>Show</h1>                                                                                                                                                                                                  
-<p><%= @post.name %></p> 
+<pre>
+<%= @post.name %>
+</pre>
 
 Copyright (c) 2009 Phil McClure (overture8), released under the MIT license
 
