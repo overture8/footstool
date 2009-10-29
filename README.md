@@ -57,8 +57,54 @@ production:
   db_suffix: _production
 </pre>
 
-Usage
-=====
+Usage in Rails
+==============
 
+**Model** classes should inherit `Document`.
+
+<pre>
+class Post < Document
+end
+</pre>
+
+**Controllers** can then make use of `Post` and then functionality inherited from `Document`.
+
+<pre>
+class PostsController < ApplicationController
+  def new
+    @post = Post.new("current_database_name")
+  end
+
+  def create
+    @post = Post.new("current_database_name")
+    @post.save(params[:post])
+    redirect_to post_url(@post)
+  end
+
+  def show
+    @post = Post.find("current_database_name", params[:id])
+  end
+end
+</pre>
+
+**Views** are pretty standard.  For `new.html.erb`...
+
+<pre>
+<h1>New Post</h1>
+<% form_for @post do |f| %>                                                                                                                                                                                    
+  <%= couchdb_rev_field f, @post %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>    
+        
+  <%= f.submit "Save" %>
+<% end %>
+</pre>
+
+For `show.html.erb`...
+
+<h1>Show</h1>                                                                                                                                                                                                  
+<p><%= @post.name %></p> 
 
 Copyright (c) 2009 Phil McClure (overture8), released under the MIT license
+
