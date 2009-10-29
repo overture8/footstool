@@ -1,9 +1,9 @@
 footstool
 =========
 
-Relax **and** put your feet up!
+(**NOTE: this plugin is still in development**)
 
-(NOTE: this plugin is still in development)
+Relax **and** put your feet up!
 
 footstool is a thin, lightweight wrapper for the couchrest library, allowing easy implementation of couchdb in the context of a Rails application.  footstool makes use of the couchrest gem and builds upon the work of the basic_model plugin.
 
@@ -23,19 +23,19 @@ Requirements
 Installation
 ============
 
-1. Get the plugin.
+- Get the plugin.
 
 `script/plugin install git://github.com/overture8/footstool.git`
 
-2. Generating the config file.
+- Generating the config file.
 
 `script/generate footstool`
 
-3. Disable ActiveRecord in the `config/environment.rb`.
+- Disable ActiveRecord in the `config/environment.rb` file.
 
 `config.frameworks -= [ :active_record ]`
 
-4. Make any changes to the `config/footstool.yml` file.  It is recommended that you add a database prefix.
+- Make any changes to the `config/footstool.yml` file.  It is recommended that you add a database prefix.
 
 <pre>
 development:
