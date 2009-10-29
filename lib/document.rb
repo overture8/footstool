@@ -34,9 +34,14 @@ require 'duck_punches/date'
 class Document
   attr_accessor :attributes
 
+  env = ENV['RAILS_ENV'] || 'development'
+  CDB_CONFIG = YAML::load(ERB.new(IO.read(RAILS_ROOT + "/config/footstool.yml")).result)[env]
+
   def self.db(database_name)
     full_url_to_database = database_name
-    full_url_to_database = "http://#{CDB_CONFIG['hostname']}:#{CDB_CONFIG['port']}/#{database_name}"
+    if full_url_to_database !~ /^http:\/\//
+      full_url_to_database = "http://#{CDB_CONFIG['host']}:#{CDB_CONFIG['port']}/#{database_name}"
+    end
     puts "Using Database: #{full_url_to_database}"
     database = CouchRest.database!(full_url_to_database)
   end
@@ -46,7 +51,7 @@ class Document
   end
 
   def initialize(database_name, attributes={})
-    @database_name = "#{CDB_CONFIG['db_prefix']}_#{database_name}_#{CDB_CONFIG['db_suffix']}"
+    @database_name = "#{CDB_CONFIG['db_prefix']}#{database_name}#{CDB_CONFIG['db_suffix']}"
     @attributes    = default_attributes.merge(attributes)
   end
 
@@ -68,7 +73,7 @@ class Document
   #   note.title # Any field from the record
 
   def self.find(database_name, id)
-    new(database_name, self.db("#{CDB_CONFIG['db_prefix']}_#{database_name}_#{CDB_CONFIG['db_suffix']}").get(id))
+    new(database_name, self.db("#{CDB_CONFIG['db_prefix']}#{database_name}#{CDB_CONFIG['db_suffix']}").get(id))
   end
 
   ##
@@ -79,7 +84,7 @@ class Document
   #   notes.rows.each {|row| row.id ... }
 
   def self.view(database_name, view_name, options={})
-    results = new(database_name, self.db("#{CDB_CONFIG['db_prefix']}_#{database_name}_#{CDB_CONFIG['db_suffix']}").view(view_name, options))
+    results = new(database_name, self.db("#{CDB_CONFIG['db_prefix']}#{database_name}#{CDB_CONFIG['db_suffix']}").view(view_name, options))
     results.rows.each_with_index do |row, index|
       results.rows[index] = new(database_name, row['value'])
     end
