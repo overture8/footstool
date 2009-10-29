@@ -1,0 +1,17 @@
+development:
+  host: localhost
+  port: 5984
+  db_prefix: 
+  db_suffix: _dev
+  
+test:
+  host: localhost
+  port: 5984
+  db_prefix: 
+  db_suffix: _test
+  
+production:
+  host: localhost
+  port: 5984
+  db_prefix: 
+  db_suffix: _production
