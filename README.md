@@ -53,8 +53,8 @@ production:
   db_suffix: _production
 </pre>
 
-Usage in Rails
-==============
+Example Usage in Rails
+=====================
 
 First, you will need to create a design document called `posts` and a view within it called `all_data`.  For the time being this has to be done manually via the couchdb futon until I have the time to write a rake task to push views to couchdb.
 <pre>
