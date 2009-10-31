@@ -7,10 +7,8 @@ Relax **and** put your feet up!
 
 footstool is a thin, lightweight wrapper for the couchrest library, allowing easy implementation of couchdb in the context of a Rails application.  footstool makes use of the couchrest gem and builds upon the work of the basic_model plugin.
 
-Features/aims of footstool are:-
-
 - Providing a simple, lightweight way to get started with couchdb in a Rails project
-- NOT trying to mimic ActiveRecord
+- Not trying to mimic ActiveRecord
 - Easily create databases dynamically
 
 Requirements
@@ -117,9 +115,10 @@ For `show.html.erb`...
 </pre>
 
 <pre>
-<h1>All Records</h1> <%= link_to 'New Record?', new_post_url %>
+All Records
+<%= link_to 'New Record?', new_post_url %>
 <% for post in @posts.rows %>
-  <p><%= post.name %> <small>(<%= post.updated_at %>)</small> <%= link_to 'show', post_url(post) %></p>                                                     
+  <p><%= post.name %> (<%= post.updated_at %>) <%= link_to 'show', post_url(post) %></p>                                                     
 <% end %>  
 </pre>
 
