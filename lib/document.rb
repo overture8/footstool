@@ -34,9 +34,6 @@ require 'duck_punches/date'
 class Document
   attr_accessor :attributes
 
-  env = ENV['RAILS_ENV'] || 'development'
-  CDB_CONFIG = YAML::load(ERB.new(IO.read(RAILS_ROOT + "/config/footstool.yml")).result)[env]
-
   def self.db(database_name)
     full_url_to_database = database_name
     if full_url_to_database !~ /^http:\/\//

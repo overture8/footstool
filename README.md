@@ -60,6 +60,13 @@ production:
 Usage in Rails
 ==============
 
+First, you will need to create a design document called `posts` and a view within it called `all_data`.  For the time being this has to be done manually via the couchdb futon until I have the time to write a rake task to push views to couchdb.
+<pre>
+function(doc) {
+  emit(doc._id, doc);
+}
+</pre>
+
 **Model** classes should inherit `Document`.
 
 <pre>
@@ -71,6 +78,10 @@ end
 
 <pre>
 class PostsController < ApplicationController
+  def index                                                                                                                                                 
+    @posts = Post.view("current_database_name", "posts/all_data")
+  end
+    
   def new
     @post = Post.new("current_database_name")
   end
@@ -90,12 +101,12 @@ end
 **Views** are pretty standard.  For `new.html.erb`...
 
 <pre>
-<% form_for @post do |f| %>                                                                                                                                                                                    
+<% form_for @post do |f| %> 
   <%= couchdb_rev_field f, @post %>
 
   <%= f.label :name %>
-  <%= f.text_field :name %>    
-        
+  <%= f.text_field :name %>
+
   <%= f.submit "Save" %>
 <% end %>
 </pre>
@@ -103,6 +114,13 @@ end
 For `show.html.erb`...
 <pre>
 <%= @post.name %>
+</pre>
+
+<pre>
+<h1>All Records</h1> <%= link_to 'New Record?', new_post_url %>
+<% for post in @posts.rows %>
+  <p><%= post.name %> <small>(<%= post.updated_at %>)</small> <%= link_to 'show', post_url(post) %></p>                                                     
+<% end %>  
 </pre>
 
 Copyright (c) 2009 Phil McClure (overture8), released under the MIT license
