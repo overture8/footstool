@@ -74,7 +74,7 @@ end
 
 <pre>
 class PostsController < ApplicationController
-  def index                                                                                                                                                 
+  def index
     @posts = Post.view("current_database_name", "posts/all_data")
   end
     
