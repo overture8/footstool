@@ -1,8 +1,6 @@
 footstool
 =========
 
-(**NOTE: this plugin is still in development**)
-
 Relax **and** put your feet up!
 
 footstool is a thin, lightweight wrapper for the couchrest library, allowing easy implementation of couchdb in the context of a Rails application.  footstool makes use of the couchrest gem and builds upon the work of the basic_model plugin.
